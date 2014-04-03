@@ -63,6 +63,7 @@ class Ovirt(Plugin, RedHatPlugin):
                 self.add_alert('Unable to get ovirt-engine pid')
             for pid in engine_pids:
                 try:
+                    # backtrace written to '/var/log/ovirt-engine/console.log
                     os.kill(pid, signal.SIGQUIT)
                 except OSError as e:
                     self.soslog.error('Unable to send signal to %d' % pid, e)
